@@ -1,0 +1,28 @@
+package org.idea.live.user.provider.service;
+
+import org.idea.live.dto.UserDTO;
+
+public interface IUserService {
+
+    /**
+     * 根据用户ID获取用户数据传输对象
+     * @param userId 用户ID，用于标识特定用户
+     * @return UserDTO 包含用户信息的DTO对象，如果未找到则返回null
+     */
+    UserDTO getByUserId(Long userId);
+
+    /**
+     * 更新用户信息的方法
+     * @param userDTO 包含用户更新信息的DTO对象
+     * @return 更新操作是否成功，true表示成功，false表示失败
+     */
+    boolean updateUserInfo(UserDTO userDTO);
+
+    /**
+     * 插入单个用户信息的方法
+     * @param userDTO 包含用户信息的DTO对象，用于封装和传输用户数据
+     * @return 成功返回true, 失败返回false
+     */
+    boolean insertOne(UserDTO userDTO);
+
+}
