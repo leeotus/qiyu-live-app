@@ -47,7 +47,7 @@ public class ConvertBeanUtils {
         for (K k : source) {
             // 将每个元素转换为目标类型并添加到目标列表中
             // 注意：这里调用的convert方法可能存在问题，参数应该是k而不是source
-            targetList.add(convert(source, target));
+            targetList.add(convert(k, target));
         }
         return targetList;
     }
