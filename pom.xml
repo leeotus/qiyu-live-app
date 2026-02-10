@@ -15,7 +15,6 @@
     <module>qiyu-live-api</module>
     <module>qiyu-live-common-interface</module>
     <module>qiyu-live-framework</module>
-      <module>qiyu-live-framework/qiyu-live-framework-datasource-starter</module>
   </modules>
 
   <properties>

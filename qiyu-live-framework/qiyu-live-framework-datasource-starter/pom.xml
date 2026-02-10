@@ -3,15 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.idea</groupId>
-        <artifactId>qiyu-live-app</artifactId>
+        <artifactId>qiyu-live-framework</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <description>提前初始化MySQL连接池</description>
     <artifactId>qiyu-live-framework-datasource-starter</artifactId>
     <name>Archetype - qiyu-live-framework-datasource-starter</name>
     <url>http://maven.apache.org</url>
-
+    <description>提前初始化MySQL连接池</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -32,6 +30,13 @@
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

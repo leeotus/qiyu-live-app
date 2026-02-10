@@ -7,6 +7,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>qiyu-live-framework</artifactId>
+    <packaging>pom</packaging>
     <name>Archetype - qiyu-live-framework</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>qiyu-live-framework-datasource-starter</module>
+        <module>qiyu-live-framework-redis-starter</module>
+    </modules>
 </project>

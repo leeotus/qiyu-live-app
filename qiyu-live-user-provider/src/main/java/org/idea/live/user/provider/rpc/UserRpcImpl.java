@@ -6,6 +6,9 @@ import org.idea.live.dto.UserDTO;
 import org.idea.live.interfaces.IUserRpc;
 import org.idea.live.user.provider.service.IUserService;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Dubbo服务实现类，标记为Dubbo服务
  * 实现IUserRpc接口，提供用户相关的远程调用服务
@@ -36,6 +39,11 @@ public class UserRpcImpl implements IUserRpc {  // 实现IUserRpc接口，定义
     @Override
     public boolean insertOne(UserDTO userDTO) {
         return userService.insertOne(userDTO);
+    }
+
+    @Override
+    public Map<Long, UserDTO> batchQueryUserInfo(List<Long> userIdList) {
+        return userService.batchQueryUserInfo(userIdList);
     }
 
 

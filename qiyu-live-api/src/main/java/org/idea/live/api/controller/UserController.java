@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * 测试控制器
  * 使用@RestController注解标记这是一个RESTful控制器
@@ -37,6 +41,21 @@ public class UserController {
     @GetMapping("/getUserInfo")
     public UserDTO getUserInfo(Long userId) {
         return userRpc.getByUserId(userId);
+    }
+
+    /**
+     * 批量查询用户信息的接口方法
+     * 根据传入的用户ID字符串，返回一个以用户ID为键，UserDTO为值的Map
+     *
+     * @param userIdStr 逗号分隔的用户ID字符串，例如 "1,2,3"
+     * @return 包含用户信息的Map，键为用户ID(Long类型)，值为对应的UserDTO对象
+     * @example http://localhost:8080/user/batchQueryUserInfo?userIdStr=1,2,3
+     */
+    @GetMapping("/batchQueryUserInfo")
+    public Map<Long, UserDTO> batchQueryUserInfo(String userIdStr) {
+        // 将逗号分隔的字符串转换为List<Long>，然后调用RPC服务批量查询用户信息
+        return userRpc.batchQueryUserInfo(Arrays.asList(userIdStr.split(",")).
+                stream().map(x -> Long.valueOf(x)).collect(Collectors.toList()));
     }
 
     @GetMapping("/updateUserInfo")

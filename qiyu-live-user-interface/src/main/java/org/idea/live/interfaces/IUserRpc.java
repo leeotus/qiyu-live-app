@@ -2,6 +2,9 @@ package org.idea.live.interfaces;
 
 import org.idea.live.dto.UserDTO;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IUserRpc {
 
     /**
@@ -30,4 +33,12 @@ public interface IUserRpc {
      * @return UserDTO 返回插入后的用户信息，成功返回true，失败返回false
      */
     boolean insertOne(UserDTO userDTO);
+
+    /**
+     * 批量查询用户信息的方法
+     *
+     * @param userIdList 用户ID列表，用于批量查询用户信息
+     * @return 返回一个Map，键为用户ID(Long类型)，值为对应的用户信息(UserDTO类型)
+     */
+    Map<Long, UserDTO> batchQueryUserInfo(List<Long> userIdList);
 }
