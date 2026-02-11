@@ -2,8 +2,8 @@ package org.idea.live.user.provider.rpc;
 
 import jakarta.annotation.Resource;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.idea.live.dto.UserDTO;
-import org.idea.live.interfaces.IUserRpc;
+import org.idea.live.user.dto.UserDTO;
+import org.idea.live.user.interfaces.IUserRpc;
 import org.idea.live.user.provider.service.IUserService;
 
 import java.util.List;

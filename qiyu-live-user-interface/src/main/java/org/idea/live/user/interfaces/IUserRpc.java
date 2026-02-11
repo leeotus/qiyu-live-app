@@ -1,6 +1,6 @@
-package org.idea.live.interfaces;
+package org.idea.live.user.interfaces;
 
-import org.idea.live.dto.UserDTO;
+import org.idea.live.user.dto.UserDTO;
 
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,8 @@
 package org.idea.live.api.controller;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.idea.live.dto.UserDTO;
-import org.idea.live.interfaces.IUserRpc;
+import org.idea.live.user.dto.UserDTO;
+import org.idea.live.user.interfaces.IUserRpc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

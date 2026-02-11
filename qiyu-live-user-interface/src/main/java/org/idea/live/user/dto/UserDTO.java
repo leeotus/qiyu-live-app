@@ -1,4 +1,4 @@
-package org.idea.live.dto;
+package org.idea.live.user.dto;
 
 import lombok.Data;
 
