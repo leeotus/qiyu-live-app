@@ -19,10 +19,12 @@ import org.idea.live.user.provider.dao.mapper.IUserTagMapper;
 import org.idea.live.user.provider.dao.po.UserTagPO;
 import org.idea.live.user.provider.service.IUserTagService;
 import org.idea.live.user.utils.TagInfoUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 
@@ -42,10 +44,7 @@ public class UserTagServiceImpl implements IUserTagService {
     private IUserTagMapper userTagMapper;
 
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
-    
-    @Resource
-    private RedisTemplate<String, UserTagDTO> userTagDTORedisTemplate;
+    private RedisTemplate<String, UserTagDTO> redisTemplate;
 
     @Resource
     private UserProviderCacheKeyBuilder cacheKeyBuilder;
@@ -135,7 +134,7 @@ public class UserTagServiceImpl implements IUserTagService {
      */
     private void deleteUserTagDTOFromRedis(Long userId) {
         String cacheKey = cacheKeyBuilder.buildTagKey(userId);
-        userTagDTORedisTemplate.delete(cacheKey);
+        redisTemplate.delete(cacheKey);
         // 延迟双删
         UserCacheAsyncDeleteDTO userCacheAsyncDeleteDTO = new UserCacheAsyncDeleteDTO();
         userCacheAsyncDeleteDTO.setCode(CacheAsyncDeleteCode.USER_TAG_DELETE.getCode());
@@ -162,7 +161,7 @@ public class UserTagServiceImpl implements IUserTagService {
      */
     private UserTagDTO queryByUserIdFromRedis(Long userId) {
         String cacheKey = cacheKeyBuilder.buildTagKey(userId);
-        UserTagDTO userTagDTO = userTagDTORedisTemplate.opsForValue().get(cacheKey);
+        UserTagDTO userTagDTO = redisTemplate.opsForValue().get(cacheKey);
         if (userTagDTO != null) {
             // 如果redis不为空
             return userTagDTO;
@@ -175,7 +174,7 @@ public class UserTagServiceImpl implements IUserTagService {
 
         userTagDTO = ConvertBeanUtils.convert(userTagPO, UserTagDTO.class);
         // 如果在mysql里找到了,还需要放入得到Redis中
-        userTagDTORedisTemplate.opsForValue().set(cacheKey, userTagDTO);
+        redisTemplate.opsForValue().set(cacheKey, userTagDTO);
 
         return userTagDTO;
     }
