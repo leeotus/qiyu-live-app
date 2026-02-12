@@ -44,9 +44,6 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private UserProviderCacheKeyBuilder cacheKeyBuilder;
 
-    @Autowired
-    private Mapper mapper;
-
     @Resource
     private MQProducer mqProducer;
 

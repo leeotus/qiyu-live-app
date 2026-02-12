@@ -1,12 +1,17 @@
 package org.idea.live.user.provider;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.idea.live.user.constants.UserTagsEnum;
+import org.idea.live.user.provider.service.IUserTagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+import jakarta.annotation.Resource;
 
 /**
  * Spring Boot应用程序主启动类
