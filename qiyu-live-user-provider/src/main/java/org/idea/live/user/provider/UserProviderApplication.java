@@ -1,8 +1,10 @@
 package org.idea.live.user.provider;
 
+import jakarta.annotation.Resource;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.idea.live.user.constants.UserTagsEnum;
-import org.idea.live.user.provider.service.IUserTagService;
+import org.idea.live.user.dto.UserLoginDTO;
+import org.idea.live.user.dto.UserPhoneDTO;
+import org.idea.live.user.provider.service.IUserPhoneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -10,8 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-
-import jakarta.annotation.Resource;
 
 /**
  * Spring Boot应用程序主启动类
@@ -22,8 +22,11 @@ import jakarta.annotation.Resource;
 @SpringBootApplication
 @EnableDubbo
 @EnableDiscoveryClient
-public class UserProviderApplication {
+public class UserProviderApplication implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(UserProviderApplication.class);
+
+    @Resource
+    private IUserPhoneService userPhoneService;
 
     /**
      * 应用程序主入口方法
@@ -49,5 +52,16 @@ public class UserProviderApplication {
                     }
                 }).start();
 
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        String phone = "18229471146";
+        UserLoginDTO userLoginDTO = userPhoneService.login(phone);
+        System.out.println(userLoginDTO);
+        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+        System.out.println(userPhoneService.queryByUserId(userLoginDTO.getUserId()));
+        System.out.println(userPhoneService.queryByPhone(phone));
+        System.out.println(userPhoneService.queryByPhone(phone));
     }
 }
