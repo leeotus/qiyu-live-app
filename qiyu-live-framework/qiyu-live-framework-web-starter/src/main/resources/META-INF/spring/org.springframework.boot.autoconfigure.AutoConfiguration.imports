@@ -1,0 +1,2 @@
+org.idea.live.web.starter.config.WebConfig
+org.idea.live.web.starter.error.GlobalExceptionHandler

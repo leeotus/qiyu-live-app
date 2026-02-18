@@ -13,5 +13,6 @@
     <modules>
         <module>qiyu-live-framework-datasource-starter</module>
         <module>qiyu-live-framework-redis-starter</module>
+        <module>qiyu-live-framework-web-starter</module>
     </modules>
 </project>

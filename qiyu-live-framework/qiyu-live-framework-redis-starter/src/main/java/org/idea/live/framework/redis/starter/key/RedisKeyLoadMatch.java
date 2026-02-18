@@ -29,36 +29,25 @@ public class RedisKeyLoadMatch implements Condition {
      */
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        // 从环境中获取应用名称
         String appName = context.getEnvironment().getProperty("spring.application.name");
-        // 检查应用名称是否为空，如果为空则记录错误日志并返回false
         if (appName == null) {
             LOGGER.error("没有匹配到应用名称，所以无法加载任何RedisKeyBuilder对象");
             return false;
         }
         boolean matchStatus = false;
         try {
-            // 通过反射获取元数据中的className字段
             Field classNameField = metadata.getClass().getDeclaredField("className");
-            // 设置可访问权限
             classNameField.setAccessible(true);
-            // 获取keyBuilder的类名
             String keyBuilderName = (String) classNameField.get(metadata);
-            // 将类名按点号分割成列表
             List<String> splitList = Arrays.asList(keyBuilderName.split("\\."));
-            //忽略大小写，统一用qiyulive开头命名
             String classSimplyName = PREFIX + splitList.get(splitList.size() - 1).toLowerCase();
-            // 检查类名是否包含应用名称（忽略连字符）
             matchStatus = classSimplyName.contains(appName.replaceAll("-", ""));
-            // 记录匹配状态信息
             LOGGER.info("keyBuilderClass is {},matchStatus is {}", keyBuilderName, matchStatus);
         } catch (NoSuchFieldException e) {
-            // 处理字段不存在的异常
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
-            // 处理非法访问异常
             throw new RuntimeException(e);
         }
-        return matchStatus;
+        return true;
     }
 }
